@@ -15,7 +15,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -56,6 +56,13 @@ public class OperacionesApp {
                 estudianteElement.appendChild(participacionEstudiante);
                 Text textParticipacionEstudiante = document.createTextNode(String.valueOf(estudiante.getParticipacion()));
                 participacionEstudiante.appendChild(textParticipacionEstudiante);
+
+                //Creamos el elemento "fechaParticipacionEstudiante" y hacemos que cuelgue de estudiante
+                //el valor de esta variable irá cambiando con el bucle
+                Element fechaParticipacionEstudiante = document.createElement("fechaParticipacion");
+                estudianteElement.appendChild(fechaParticipacionEstudiante);
+                Text textFechaParticipacionEstudiante = document.createTextNode(estudiante.getfechaParticipacion().toString());
+                fechaParticipacionEstudiante.appendChild(textFechaParticipacionEstudiante);
 
             }
 
@@ -131,8 +138,8 @@ public class OperacionesApp {
         }
         //Aumenta la participación del alumno que se ha elegido en uno
         estudianteMenosParticipativo.setParticipacion(estudianteMenosParticipativo.getParticipacion() + 1);
-        LocalDate fechaActual = LocalDate.now();
-        estudianteMenosParticipativo.setFechaParticipacion(fechaActual);
+        LocalDateTime fechaActual = LocalDateTime.now();
+        estudianteMenosParticipativo.setfechaParticipacion(fechaActual);
         //Para guardar los cambios en el XML se importa el archivo
         importarXML(listaEstudiantes, rutaXML);
         //Devuelve el alumno menos participativo
@@ -156,8 +163,8 @@ public class OperacionesApp {
             //Creamos una NodeList que irá guardando los elementos de la lista según el nombre de la etiqueta, en este caso "estudiante"
             NodeList estudiantes = document.getElementsByTagName("estudiante");
 
-            //Con un bucle vamos iterando sobre los distintos nodos del XML e introduciendo los valores de las etiquetas "nombre"
-            //y "participacion" en su correspondiente etiqueta "estudiante"
+            //Con un bucle vamos iterando sobre los distintos nodos del XML e introduciendo los valores de las etiquetas "nombre",
+            //"participacion" y "fechaParticipacion" en su correspondiente etiqueta "estudiante"
             for (int i = 0; i < estudiantes.getLength(); i++) {
                 Node node = estudiantes.item(i);
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
@@ -166,6 +173,7 @@ public class OperacionesApp {
                     Estudiante estudiante = new Estudiante();
                     estudiante.setNombre(eElement.getElementsByTagName("nombre").item(0).getTextContent());
                     estudiante.setParticipacion(Integer.parseInt(eElement.getElementsByTagName("participacion").item(0).getTextContent()));
+                    estudiante.setfechaParticipacion(LocalDateTime.parse(eElement.getElementsByTagName("fechaParticipacion").item(0).getTextContent()));
 
                     //Se va añadiendo cada estudiante con sus atributos ya recibidos en la lista
                     listaestudiantes.add(estudiante);
@@ -223,6 +231,7 @@ public class OperacionesApp {
             }
         }
 
+        //Se imprimen los resultados con un submenú.
         boolean subMenuActivo = true;
         Scanner scan = new Scanner(System.in);
         while (subMenuActivo) {
@@ -264,4 +273,35 @@ public class OperacionesApp {
             }
         }
     }
+
+    public static void ultimoAlumnoParticipar(String rutaXML) {
+        //Pasa el XML a una lista
+        List<Estudiante> listaEstudiantes = pasarXML_A_Lista(rutaXML);
+        //Variables para almacenar la fecha y el nombre del último alumno
+        LocalDateTime ultimaFechaParticipacion = LocalDateTime.MIN;
+        Estudiante ultimoAlumno = null;
+
+        //Bucle que recorre el XML para buscar un candidato
+        //Compara la fecha y hora de los alumnos y guarda la más actual
+        for (Estudiante estudiante : listaEstudiantes) {
+            LocalDateTime fechaParticipacion = estudiante.getfechaParticipacion();
+            if (fechaParticipacion != null && fechaParticipacion.isAfter(ultimaFechaParticipacion)) {
+                ultimaFechaParticipacion = fechaParticipacion;
+                ultimoAlumno = estudiante;
+            }
+        }
+
+        //Imprime el resultado
+        if (ultimoAlumno != null) {
+            System.out.println("·Último alumno en participar:" + '\n' + "-Nombre: " + ultimoAlumno.getNombre() + '\n' +
+                    "-Fecha: " + ultimoAlumno.getfechaParticipacion());
+
+        } else {
+            System.out.println("No existen alumnos. Registre alguno e inténtelo de nuevo.");
+        }
+    }
+
+
+
+
 }

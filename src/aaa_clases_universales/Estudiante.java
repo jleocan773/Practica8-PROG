@@ -2,7 +2,7 @@ package aaa_clases_universales;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Estudiante extends Persona implements Serializable {
     @Id
@@ -13,13 +13,13 @@ public class Estudiante extends Persona implements Serializable {
 
     private String grupo;
 
-    private LocalDate fechaParticipacion;
+    private LocalDateTime fechaParticipacion;
 
-    public LocalDate getFechaParticipacion() {
+    public LocalDateTime getfechaParticipacion() {
         return fechaParticipacion;
     }
 
-    public void setFechaParticipacion(LocalDate fechaParticipacion) {
+    public void setfechaParticipacion(LocalDateTime fechaParticipacion) {
         this.fechaParticipacion = fechaParticipacion;
     }
     @Embedded
@@ -34,6 +34,12 @@ public class Estudiante extends Persona implements Serializable {
     public Estudiante(String nombre, int participacion){
         this.nombre = nombre;
         this.participacion = participacion;
+    }
+
+    public Estudiante(String nombre, int participacion, LocalDateTime fechaParticipacion){
+        this.nombre = nombre;
+        this.participacion = participacion;
+        this.fechaParticipacion = fechaParticipacion;
     }
 
     public Estudiante(String nombre, int participacion, String grupo, Ordenador ordenadorAsignado) {
@@ -91,6 +97,6 @@ public class Estudiante extends Persona implements Serializable {
 //    }
     @Override
     public String toString() {
-        return "Nombre: " + getNombre() + " | Participación: " + getParticipacion();
+        return "Nombre: " + getNombre() + " | Participación: " + getParticipacion() + " | Fecha Participación: " + getfechaParticipacion();
     }
 }
