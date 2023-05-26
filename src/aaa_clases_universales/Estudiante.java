@@ -2,8 +2,8 @@ package aaa_clases_universales;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 
-@Entity
 public class Estudiante extends Persona implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE, generator = "secuencia1en1")
@@ -12,6 +12,16 @@ public class Estudiante extends Persona implements Serializable {
     private int participacion;
 
     private String grupo;
+
+    private LocalDate fechaParticipacion;
+
+    public LocalDate getFechaParticipacion() {
+        return fechaParticipacion;
+    }
+
+    public void setFechaParticipacion(LocalDate fechaParticipacion) {
+        this.fechaParticipacion = fechaParticipacion;
+    }
     @Embedded
     private Ordenador ordenadorAsignado;
 

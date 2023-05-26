@@ -15,8 +15,11 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 
 public class OperacionesApp {
 
@@ -128,6 +131,8 @@ public class OperacionesApp {
         }
         //Aumenta la participación del alumno que se ha elegido en uno
         estudianteMenosParticipativo.setParticipacion(estudianteMenosParticipativo.getParticipacion() + 1);
+        LocalDate fechaActual = LocalDate.now();
+        estudianteMenosParticipativo.setFechaParticipacion(fechaActual);
         //Para guardar los cambios en el XML se importa el archivo
         importarXML(listaEstudiantes, rutaXML);
         //Devuelve el alumno menos participativo
@@ -194,5 +199,69 @@ public class OperacionesApp {
             //Y finalmente se importa el archivo, así acabamos con el mismo XML pero con todas las participaciones en 0
             importarXML(listaEstudiantes,rutaParaResetear);
             System.out.println("Se han reseteado las participaciones de los Alumnos");
+    }
+
+
+    public static void mostrarAlumnosPorParticipacion(String rutaXML, int valorParticipaciones) {
+
+        //Pasa el XML a una lista
+        List<Estudiante> listaEstudiantes = pasarXML_A_Lista(rutaXML);
+        //Listas para ordenar a los alumnos donde corresponda según el valor dado.
+        List<Estudiante> alumnosValorMayor = new ArrayList<>();
+        List<Estudiante> alumnosValorMenor = new ArrayList<>();
+        List<Estudiante> alumnosValorIgual = new ArrayList<>();
+
+        //Operación que recorre la lista de alumnos y los ordena.
+        for (Estudiante estudiante : listaEstudiantes) {
+            int participacion = estudiante.getParticipacion();
+            if (participacion < valorParticipaciones) {
+                alumnosValorMenor.add(estudiante);
+            } else if (participacion > valorParticipaciones) {
+                alumnosValorMayor.add(estudiante);
+            } else {
+                alumnosValorIgual.add(estudiante);
+            }
+        }
+
+        boolean subMenuActivo = true;
+        Scanner scan = new Scanner(System.in);
+        while (subMenuActivo) {
+            System.out.println("Escoja una opción:");
+            System.out.println("1- Alumnos con participaciones mayor a " + valorParticipaciones);
+            System.out.println("2- Alumnos con participaciones menor a " + valorParticipaciones);
+            System.out.println("3- Alumnos con participaciones igual a " + valorParticipaciones);
+            System.out.println("4. Volver al menú principal");
+            int opcionSubMenu = scan.nextInt();
+
+            switch (opcionSubMenu) {
+                case 1:
+                    System.out.println("•Lista de alumnos con participaciones mayor a " + valorParticipaciones + ":");
+                    for (Estudiante estudiante : alumnosValorMayor) {
+                        System.out.println("- Nombre: " + estudiante.getNombre() + "\n- Participaciones: "
+                                + estudiante.getParticipacion());
+                    }
+                    break;
+                case 2:
+                    System.out.println("•Lista de alumnos con participaciones menor a " + valorParticipaciones + ":");
+                    for (Estudiante estudiante : alumnosValorMenor) {
+                        System.out.println("- Nombre: " + estudiante.getNombre() + "\n- Participaciones: "
+                                + estudiante.getParticipacion());
+                    }
+                    break;
+                case 3:
+                    System.out.println("•Lista de alumnos con participaciones igual a " + valorParticipaciones + ":");
+                    for (Estudiante estudiante : alumnosValorIgual) {
+                        System.out.println("-Nombre: " + estudiante.getNombre() + "\n- Participaciones: "
+                                + estudiante.getParticipacion());
+                    }
+                    break;
+                case 4:
+                    subMenuActivo = false;
+                    break;
+                default:
+                    System.out.println("Opción no válida");
+                    break;
+            }
+        }
     }
 }
