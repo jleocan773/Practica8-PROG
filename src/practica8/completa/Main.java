@@ -73,10 +73,10 @@ public class Main extends OperacionesApp {
                 System.out.println("6. Alumnos con participación por debajo de la media");
                 System.out.println("7. Mostrar alumnos según su participación");
                 System.out.println("8. Mostrar el alumno con la participación más reciente");
-                System.out.println("8. Mostrar el alumno con la participación más reciente");
-                System.out.println("8. Mostrar el alumno con la participación más reciente");
+                System.out.println("9. Mostrar información de un alumno concreto");
+                System.out.println("10. Dar de alta, baja y modificar alumnos");
                 System.out.println("11. Salir");
-                System.out.print("Introduce una opcion (1-7): ");
+                System.out.print("Introduce una opción (1-11): ");
                 int opcion = scan.nextInt();
                 switch (opcion) {
                     case 1:
@@ -137,7 +137,7 @@ public class Main extends OperacionesApp {
                         String opciongestion = scan.next();
                         System.out.println("Introduzca el nombre del alumno");
                         String nombre = scan.next();
-                        gestionarAlumnos(rutamodif,opciongestion,nombre);
+                        //gestionarAlumnos(rutamodif,opciongestion,nombre);
                         break;
                     case 11:
                         exit = true;
