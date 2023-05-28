@@ -209,6 +209,40 @@ public class OperacionesApp {
             System.out.println("Se han reseteado las participaciones de los Alumnos");
     }
 
+    public static void mostrarAlumnoMasYMenosParticipativo(String rutaXML){
+        List<Estudiante> listaEstudiantes = pasarXML_A_Lista(rutaXML);
+        Estudiante estudianteMenosParticipativo = listaEstudiantes.get(0);
+        for (int i = 1; i < listaEstudiantes.size(); i++) {
+            if (listaEstudiantes.get(i).getParticipacion() < estudianteMenosParticipativo.getParticipacion()) {
+                estudianteMenosParticipativo = listaEstudiantes.get(i);
+            }
+        }
+        System.out.println("El Alumno menos participativo es: " + estudianteMenosParticipativo.getNombre() + " con una participación de " + estudianteMenosParticipativo.getParticipacion());
+
+        Estudiante estudianteMasParticipativo = listaEstudiantes.get(0);
+        for (int i = 1; i < listaEstudiantes.size(); i++) {
+            if (listaEstudiantes.get(i).getParticipacion() > estudianteMasParticipativo.getParticipacion()) {
+                estudianteMasParticipativo = listaEstudiantes.get(i);
+            }
+        }
+        System.out.println("El Alumno menos participativo es: " + estudianteMasParticipativo.getNombre() + " con una participación de " + estudianteMasParticipativo.getParticipacion());
+
+    }
+
+    public static void mostrarAlumnosPorDebajoDeLaMedia(String rutaArchivoXML){
+        List<Estudiante> listaEstudiantes = pasarXML_A_Lista(rutaArchivoXML);
+        int mediaParticipacion = 0;
+        for (int i = 0; i < listaEstudiantes.size(); i++){
+            mediaParticipacion += listaEstudiantes.get(i).getParticipacion();
+        }
+        mediaParticipacion = mediaParticipacion  / listaEstudiantes.size();
+        for (int i = 0 ; i < listaEstudiantes.size(); i++){
+            if ( listaEstudiantes.get(i).getParticipacion() < mediaParticipacion){
+                System.out.println(listaEstudiantes.get(i));
+            }
+        }
+    }
+
 
     public static void mostrarAlumnosPorParticipacion(String rutaXML, int valorParticipaciones) {
 

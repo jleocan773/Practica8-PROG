@@ -69,9 +69,11 @@ public class Main extends OperacionesApp {
                 System.out.println("2. Exportar archivo XML");
                 System.out.println("3. Seleccionar alumno menos participativo");
                 System.out.println("4. Resetear participaciones");
-                System.out.println("5. Mostrar alumnos según su participación");
-                System.out.println("6. Mostrar el alumno con la participación más reciente");
-                System.out.println("7. Salir");
+                System.out.println("5. Alumnos más y menos participativos");
+                System.out.println("6. Alumnos con participación por debajo de la media");
+                System.out.println("7. Mostrar alumnos según su participación");
+                System.out.println("8. Mostrar el alumno con la participación más reciente");
+                System.out.println("9. Salir");
                 System.out.print("Introduce una opcion (1-7): ");
                 int opcion = scan.nextInt();
                 switch (opcion) {
@@ -98,18 +100,28 @@ public class Main extends OperacionesApp {
                         resetearParticipaciones(rutaReset);
                         break;
                     case 5:
+                        System.out.println("Introduce la ruta del archivo XML para mostrar los alumno más y menos participativos: ");
+                        String rutaMasMenosParticipativo = scan.next();
+                        mostrarAlumnoMasYMenosParticipativo(rutaMasMenosParticipativo);
+                        break;
+                    case 6:
+                        System.out.println("Introduce la ruta del archivo XML para mostrar los alumno que estén por debajo de la media de participaciones: ");
+                        String rutaAlumnosDebajoMedia = scan.next();
+                        mostrarAlumnosPorDebajoDeLaMedia(rutaAlumnosDebajoMedia);
+                        break;
+                    case 7:
                         System.out.println("Introduce la ruta del archivo XML a analizar: ");
                         String rutaAlumnosParticipacion = scan.next();
                         System.out.print("Introduce un valor para filtrar por participación: ");
                         int valor = scan.nextInt();
                         mostrarAlumnosPorParticipacion(rutaAlumnosParticipacion, valor);
                         break;
-                    case 6:
+                    case 8:
                         System.out.println("Introduce la ruta del archivo XML a analizar: ");
                         String rutaXML = scan.next();
                         ultimoAlumnoParticipar(rutaXML);
                         break;
-                    case 7:
+                    case 9:
                         exit = true;
                         System.out.println("Gracias por confiar en Remedy Softworks");
                         break;
