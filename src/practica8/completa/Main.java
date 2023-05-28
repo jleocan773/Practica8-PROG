@@ -73,7 +73,9 @@ public class Main extends OperacionesApp {
                 System.out.println("6. Alumnos con participación por debajo de la media");
                 System.out.println("7. Mostrar alumnos según su participación");
                 System.out.println("8. Mostrar el alumno con la participación más reciente");
-                System.out.println("9. Salir");
+                System.out.println("8. Mostrar el alumno con la participación más reciente");
+                System.out.println("8. Mostrar el alumno con la participación más reciente");
+                System.out.println("11. Salir");
                 System.out.print("Introduce una opcion (1-7): ");
                 int opcion = scan.nextInt();
                 switch (opcion) {
@@ -122,6 +124,22 @@ public class Main extends OperacionesApp {
                         ultimoAlumnoParticipar(rutaXML);
                         break;
                     case 9:
+                        System.out.println("Introduce la ruta del archivo XML a consultar: ");
+                        String rutaConsulta = scan.next();
+                        System.out.println("Introduzca el nombre del alumno");
+                        String nombrealumn = scan.next();
+                        mostrarInformacionAlumno(rutaConsulta,nombrealumn);
+                        break;
+                    case 10:
+                        System.out.println("Introduce la ruta del archivo XML a modificar: ");
+                        String rutamodif = scan.next();
+                        System.out.println("Introduzca la opción a usar, 'alta', 'baja' o 'modificar'");
+                        String opciongestion = scan.next();
+                        System.out.println("Introduzca el nombre del alumno");
+                        String nombre = scan.next();
+                        gestionarAlumnos(rutamodif,opciongestion,nombre);
+                        break;
+                    case 11:
                         exit = true;
                         System.out.println("Gracias por confiar en Remedy Softworks");
                         break;

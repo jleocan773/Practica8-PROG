@@ -336,6 +336,51 @@ public class OperacionesApp {
     }
 
 
+    public static void mostrarInformacionAlumno(String rutaConsulta, String nombreAlumno) {
+        List<Estudiante> listaEstudiantes = pasarXML_A_Lista(rutaConsulta);
+        for (Estudiante estudiante : listaEstudiantes) {
+            if (estudiante.getNombre().equals(nombreAlumno)) {
+                System.out.println("Información del alumno:");
+                System.out.println("- Nombre: " + estudiante.getNombre());
+                System.out.println("- Participaciones: " + estudiante.getParticipacion());
+                System.out.println("- Fecha de la última participación: " + estudiante.getfechaParticipacion());
+                return;
+            }
+        }
+        System.out.println("No se encontró al alumno " + nombreAlumno + " en la lista.");
+    }
 
+    // Método para dar de alta, baja y modificar alumnos
+    public static void gestionarAlumnos(String rutamodif, String opcion, Estudiante alumno) {
+        List<Estudiante> listaEstudiantes = pasarXML_A_Lista(rutamodif);
+        switch (opcion) {
+            case "alta":
+                listaEstudiantes.add(alumno);
+                System.out.println("Alumno agregado correctamente.");
+                break;
+            case "baja":
+                boolean alumnoEliminado = listaEstudiantes.remove(alumno);
+                if (alumnoEliminado) {
+                    System.out.println("Alumno eliminado correctamente.");
+                } else {
+                    System.out.println("No se encontró al alumno en la lista.");
+                }
+                break;
+            case "modificar":
+                for (Estudiante estudiante : listaEstudiantes) {
+                    if (estudiante.getNombre().equals(alumno.getNombre())) {
+                        estudiante.setParticipacion(alumno.getParticipacion());
+                        estudiante.setfechaParticipacion(alumno.getfechaParticipacion());
+                        System.out.println("Alumno modificado correctamente.");
+                        return;
+                    }
+                }
+                System.out.println("No se encontró al alumno en la lista.");
+                break;
+            default:
+                System.out.println("Opción inválida.");
+                break;
+        }
+    }
 
 }
