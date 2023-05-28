@@ -2,6 +2,9 @@ package practica8.completa;
 
 import aaa_clases_universales.Estudiante;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -124,11 +127,25 @@ public class Main extends OperacionesApp {
                         ultimoAlumnoParticipar(rutaXML);
                         break;
                     case 9:
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
                         System.out.println("Introduce la ruta del archivo XML a consultar: ");
-                        String rutaConsulta = scan.next();
-                        System.out.println("Introduzca el nombre del alumno");
-                        String nombrealumn = scan.next();
-                        mostrarInformacionAlumno(rutaConsulta,nombrealumn);
+                        String rutaConsulta = null;
+                        try {
+                            rutaConsulta = reader.readLine();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        System.out.println("Introduzca el nombre del alumno: ");
+                        String nombrealumn = null;
+                        try {
+                            nombrealumn = reader.readLine();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        
+                        mostrarInformacionAlumno(rutaConsulta, nombrealumn);
                         break;
                     case 10:
                         System.out.println("Introduce la ruta del archivo XML a modificar: ");
