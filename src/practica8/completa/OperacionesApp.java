@@ -236,6 +236,7 @@ public class OperacionesApp {
             mediaParticipacion += listaEstudiantes.get(i).getParticipacion();
         }
         mediaParticipacion = mediaParticipacion  / listaEstudiantes.size();
+        System.out.println("La media de partipación es: " + mediaParticipacion);
         for (int i = 0 ; i < listaEstudiantes.size(); i++){
             if ( listaEstudiantes.get(i).getParticipacion() < mediaParticipacion){
                 System.out.println(listaEstudiantes.get(i));
