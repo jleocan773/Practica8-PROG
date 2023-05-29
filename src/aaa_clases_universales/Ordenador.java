@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.sql.Timestamp;
 
-@Entity
 public class Ordenador implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE, generator = "secuencia10en10")

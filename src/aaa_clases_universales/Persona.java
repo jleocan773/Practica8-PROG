@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.Transient;
 import java.io.Serializable;
 
-@Entity(name = "Persona")
 public class Persona implements Serializable {
     public String nombre;
     @Transient
