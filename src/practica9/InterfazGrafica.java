@@ -1,6 +1,5 @@
 package practica9;
 
-import aaa_clases_universales.Estudiante;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,14 +17,6 @@ public class InterfazGrafica {
     JFrame ventanaImportarXML;
     JFrame ventanaExportarXML;
     JFrame ventanaSeleccionarAlumnoMenosParticipativo;
-    JFrame ventanaResetearParticipaciones;
-    JFrame ventanaAlumnosMasYMenosParticipativos;
-    JFrame ventanaAlumnoPorDebajoMedia;
-    JFrame ventanaAlumnosConPartipacionIndicada;
-    JFrame ventanaÚltimoAlumnoEnParticipar;
-    JFrame ventanaMostrarInfoAlumno;
-    JFrame ventanaGestionarAlumno;
-
 
 
     public static void main(String[] args) {
