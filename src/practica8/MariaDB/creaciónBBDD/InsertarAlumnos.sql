@@ -12,4 +12,4 @@ INSERT INTO clase_daw1 VALUES
 (10, 'Ricardo Gabriel Moreno Cantea', 4, '2023-05-21'),
 (11, 'Daniel Alfonso Rodríguez Santos', 5, '2023-05-22'),
 (12, 'Juan Manuel Saborido Baena', 3, '2023-05-28'),
-(13, 'Antonio Jesús Téllez Perdigones', 2, '2023-05-20'),
+(13, 'Antonio Jesús Téllez Perdigones', 2, '2023-05-20');

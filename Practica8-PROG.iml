@@ -10,5 +10,6 @@
     <orderEntry type="library" name="mariadb-java-client-3.1.4" level="project" />
     <orderEntry type="library" name="objectdb" level="project" />
     <orderEntry type="library" name="objectdb1" level="project" />
+    <orderEntry type="library" name="jdom-2.0.6.1" level="project" />
   </component>
 </module>
