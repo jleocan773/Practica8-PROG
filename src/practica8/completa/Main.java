@@ -148,13 +148,33 @@ public class Main extends OperacionesApp {
                         mostrarInformacionAlumno(rutaConsulta, nombrealumn);
                         break;
                     case 10:
+                        BufferedReader readerges = new BufferedReader(new InputStreamReader(System.in));
+
                         System.out.println("Introduce la ruta del archivo XML a modificar: ");
-                        String rutamodif = scan.next();
+                        String rutaGestion = null;
+                        try {
+                            rutaGestion = readerges.readLine();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
                         System.out.println("Introduzca la opción a usar, 'alta', 'baja' o 'modificar'");
-                        String opciongestion = scan.next();
-                        System.out.println("Introduzca el nombre del alumno");
-                        String nombre = scan.next();
-                        //gestionarAlumnos(rutamodif,opciongestion,nombre);
+                        String opcionGestion = null;
+                        try {
+                            opcionGestion = readerges.readLine();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        System.out.println("Introduzca el nombre del alumno: ");
+                        String nombre = null;
+                        try {
+                            nombre = readerges.readLine();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        gestionarAlumnos(rutaGestion, opcionGestion, nombre);
                         break;
                     case 11:
                         exit = true;

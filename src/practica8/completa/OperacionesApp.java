@@ -352,35 +352,52 @@ public class OperacionesApp {
     }
 
     // Método para dar de alta, baja y modificar alumnos
-    public static void gestionarAlumnos(String rutamodif, String opcion, Estudiante alumno) {
-        List<Estudiante> listaEstudiantes = pasarXML_A_Lista(rutamodif);
-        switch (opcion) {
+    public static void gestionarAlumnos(String rutaGestion, String opcionGestion, String nombre) {
+        List<Estudiante> listaEstudiantes = pasarXML_A_Lista(rutaGestion);
+        switch (opcionGestion) {
             case "alta":
-                listaEstudiantes.add(alumno);
-                System.out.println("Alumno agregado correctamente.");
+                // Crear un nuevo estudiante y agregarlo a la lista de estudiantes
+                Estudiante nuevoEstudiante = new Estudiante(nombre, 0, LocalDateTime.now());
+                listaEstudiantes.add(nuevoEstudiante);
+                System.out.println("Alumno dado de alta correctamente.");
                 break;
             case "baja":
-                boolean alumnoEliminado = listaEstudiantes.remove(alumno);
-                if (alumnoEliminado) {
-                    System.out.println("Alumno eliminado correctamente.");
+                // Buscar el estudiante por nombre y eliminarlo de la lista de estudiantes
+                Estudiante estudianteEliminar = null;
+                for (Estudiante estudiante : listaEstudiantes) {
+                    if (estudiante.getNombre().equals(nombre)) {
+                        estudianteEliminar = estudiante;
+                        break;
+                    }
+                }
+                if (estudianteEliminar != null) {
+                    listaEstudiantes.remove(estudianteEliminar);
+                    System.out.println("Alumno dado de baja correctamente.");
                 } else {
-                    System.out.println("No se encontró al alumno en la lista.");
+                    System.out.println("No se encontró ningún alumno con ese nombre.");
                 }
                 break;
             case "modificar":
+                // Buscar el estudiante por nombre y modificar su participación
+                Estudiante estudianteModificar = null;
                 for (Estudiante estudiante : listaEstudiantes) {
-                    if (estudiante.getNombre().equals(alumno.getNombre())) {
-                        estudiante.setParticipacion(alumno.getParticipacion());
-                        estudiante.setfechaParticipacion(alumno.getfechaParticipacion());
-                        System.out.println("Alumno modificado correctamente.");
-                        return;
+                    if (estudiante.getNombre().equals(nombre)) {
+                        estudianteModificar = estudiante;
+                        break;
                     }
                 }
-                System.out.println("No se encontró al alumno en la lista.");
+                if (estudianteModificar != null) {
+                    Scanner scan = new Scanner(System.in);
+                    System.out.print("Introduce la nueva participación del alumno: ");
+                    int nuevaParticipacion = scan.nextInt();
+                    estudianteModificar.setParticipacion(nuevaParticipacion);
+                    System.out.println("Participación del alumno modificada correctamente.");
+                } else {
+                    System.out.println("No se encontró ningún alumno con ese nombre.");
+                }
                 break;
             default:
-                System.out.println("Opción inválida.");
-                break;
+                System.out.println("Opción de gestión no válida.");
         }
     }
 
