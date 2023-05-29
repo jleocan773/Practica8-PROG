@@ -15,9 +15,9 @@ import java.sql.SQLException;
 public class ImportarXMLaBBDD {
 
     public static void main(String[] args) throws SQLException, IOException, JDOMException, ClassNotFoundException {
-        importarXML("estudiantes", "clase_daw1", "C:\\Users\\1DAW_2223_01\\IdeaProjects\\Practica8-PROG\\alumnos.xml");
+        importarXMLaBBDD("clase_daw1", "C:\\Users\\1DAW_2223_01\\IdeaProjects\\Practica8-PROG\\alumnos.xml");
     }
-    static void importarXML(String baseDatos, String tabla, String rutaXML) throws SQLException, IOException, JDOMException, ClassNotFoundException {
+    static void importarXMLaBBDD(String tabla, String rutaXML) throws SQLException, IOException, JDOMException, ClassNotFoundException {
         String enlazar = "jdbc:mariadb://localhost:3306/estudiantes";
         Class.forName("org.mariadb.jdbc.Driver");
         Connection connection = DriverManager.getConnection(enlazar, "jonathanleon", "jonathanleon");
