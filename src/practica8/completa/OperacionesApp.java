@@ -359,6 +359,7 @@ public class OperacionesApp {
                 // Crear un nuevo estudiante y agregarlo a la lista de estudiantes
                 Estudiante nuevoEstudiante = new Estudiante(nombre, 0, LocalDateTime.now());
                 listaEstudiantes.add(nuevoEstudiante);
+                importarXML(listaEstudiantes, rutaGestion);
                 System.out.println("Alumno dado de alta correctamente.");
                 break;
             case "baja":
@@ -372,6 +373,7 @@ public class OperacionesApp {
                 }
                 if (estudianteEliminar != null) {
                     listaEstudiantes.remove(estudianteEliminar);
+                    importarXML(listaEstudiantes, rutaGestion);
                     System.out.println("Alumno dado de baja correctamente.");
                 } else {
                     System.out.println("No se encontró ningún alumno con ese nombre.");
@@ -391,6 +393,7 @@ public class OperacionesApp {
                     System.out.print("Introduce la nueva participación del alumno: ");
                     int nuevaParticipacion = scan.nextInt();
                     estudianteModificar.setParticipacion(nuevaParticipacion);
+                    importarXML(listaEstudiantes, rutaGestion);
                     System.out.println("Participación del alumno modificada correctamente.");
                 } else {
                     System.out.println("No se encontró ningún alumno con ese nombre.");
